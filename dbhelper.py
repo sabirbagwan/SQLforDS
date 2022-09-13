@@ -21,8 +21,19 @@ class DBhelper:
             """.format(name, email, password))
             self.conn.commit()
         except:
-            print('Some registeration error occured')
             return -1
         else:
-            print('registerration done successfully')
             return 1
+
+    def search(self, email, password):
+            self.mycursor.execute("""
+            SELECT * FROM users WHERE email LIKE '{}' AND password LIKE '{}';
+            """.format(email, password))
+    
+
+            data = self.mycursor.fetchall()
+           
+            return data
+
+    
+
